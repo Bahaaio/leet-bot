@@ -1,0 +1,25 @@
+# Dependencies
+node_modules
+
+# Logs
+*.log
+npm-debug.log*
+
+# Package manager files
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+# Build outputs
+dist
+build
+.next
+out
+
+# Cache
+.cache
+.eslintcache
+
+# Environment files
+.env
+.env.*
