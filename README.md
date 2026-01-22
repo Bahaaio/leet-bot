@@ -2,7 +2,7 @@
 
 # leet-bot
 
-A Discord bot for LeetCode daily challenges and random problems.
+A Discord bot for LeetCode practice. Get daily challenges, random problems, and view user profiles.
 
 ## Commands
 
@@ -10,6 +10,7 @@ A Discord bot for LeetCode daily challenges and random problems.
 | ----------------------- | --------------------------------------------------------------------- |
 | `/daily`                | Get today's LeetCode daily coding challenge                           |
 | `/problem [difficulty]` | Get a random LeetCode problem (optionally filter by Easy/Medium/Hard) |
+| `/profile <username>`   | View a LeetCode user's profile, stats, and social links               |
 
 ## Setup
 
