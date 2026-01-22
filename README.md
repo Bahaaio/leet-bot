@@ -1,3 +1,5 @@
+<img src=".github/assets/favicon.png" align="right" width="120">
+
 # leet-bot
 
 A Discord bot for LeetCode daily challenges and random problems.
