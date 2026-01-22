@@ -55,7 +55,7 @@ module.exports = {
       .setThumbnail(user.avatar)
       .setDescription(`${user.about}\n\n ${socials}`)
       .addFields(
-        { name: `${new Date().getFullYear()} Activity`, value: activity },
+        { name: `Past Year Activity`, value: activity },
         { name: "Solved Problems", value: solvedTags },
         { name: "Skill Tags", value: skillTags },
         { name: "Ranking", value: `#\`${user.ranking}\`` }
