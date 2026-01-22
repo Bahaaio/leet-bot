@@ -65,6 +65,7 @@ npm start
 | ---------------- | ------------------------------------ |
 | `npm start`      | Start the bot                        |
 | `npm run deploy` | Register slash commands with Discord |
+| `npm run delete` | Remove slash commands from Discord   |
 | `npm run lint`   | Run ESLint                           |
 | `npm run format` | Format code with Prettier            |
 

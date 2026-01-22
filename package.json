@@ -13,6 +13,7 @@
   "scripts": {
     "start": "node index.js",
     "deploy": "node deploy-commands.js",
+    "delete": "node delete-commands.js",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "format": "prettier --write .",
