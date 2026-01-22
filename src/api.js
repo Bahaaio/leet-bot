@@ -84,4 +84,70 @@ query {
       dislikes: problem.dislikes,
     };
   },
+
+  /**
+   * fetches user information from LeetCode.
+   * @param {string} username - the LeetCode username
+   * @returns {Object} An object containing details of the user
+   */
+  async getUser(username) {
+    const response = await lc.graphql({
+      query: `
+query ($username: String!) {
+  matchedUser(username: $username) {
+    username
+    githubUrl
+    linkedinUrl
+    twitterUrl
+    userCalendar {
+      streak
+      totalActiveDays
+    }
+    profile {
+      realName
+      userAvatar
+      skillTags
+      ranking
+      aboutMe
+    }
+    submitStats {
+        acSubmissionNum {
+            difficulty
+            count
+            submissions
+        }
+        totalSubmissionNum {
+            difficulty
+            count
+            submissions
+        }
+    }
+  }
+}`,
+      variables: { username },
+    });
+
+    const user = response.data.matchedUser;
+
+    const solved = user.submitStats.acSubmissionNum.filter(
+      obj => obj.difficulty !== "All"
+    );
+
+    return {
+      username: user.username,
+      real_name: user.profile.realName,
+      about: user.profile.aboutMe,
+      avatar: user.profile.userAvatar,
+      skill_tags: user.profile.skillTags,
+      ranking: user.profile.ranking,
+
+      streak: user.userCalendar.streak,
+      total_active_days: user.userCalendar.totalActiveDays,
+      solved: solved,
+
+      githubUrl: user.githubUrl,
+      linkedinUrl: user.linkedinUrl,
+      twitterUrl: user.twitterUrl,
+    };
+  },
 };
