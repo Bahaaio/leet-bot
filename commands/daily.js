@@ -9,7 +9,7 @@ module.exports = {
 
   async execute(interaction) {
     const problem = await getDailyProblem();
-    const embed = embedProblem(problem);
+    const embed = embedProblem(problem, "Daily problem");
 
     await interaction.reply({ embeds: [embed] });
   },

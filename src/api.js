@@ -1,7 +1,7 @@
 const { LeetCode } = require("leetcode-query");
+const { LEETCODE_BASE_URL } = require("./constants");
 
 const lc = new LeetCode();
-const LEETCODE_BASE_URL = "https://leetcode.com";
 
 /**
  * featches a random problem from LeetCode.

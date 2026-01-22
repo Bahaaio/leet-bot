@@ -21,7 +21,7 @@ module.exports = {
     const difficulty = interaction.options.getString("difficulty");
     const problem = await getRandomProblem(difficulty);
 
-    const embed = embedProblem(problem);
+    const embed = embedProblem(problem, "Random problem");
     await interaction.reply({ embeds: [embed] });
   },
 };
