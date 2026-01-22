@@ -11,9 +11,9 @@ module.exports = {
         .setName("difficulty")
         .setDescription("The difficulty of the random problem")
         .addChoices(
-          { name: "easy", value: "Easy" },
-          { name: "medium", value: "Medium" },
-          { name: "hard", value: "Hard" }
+          { name: "easy", value: "EASY" },
+          { name: "medium", value: "MEDIUM" },
+          { name: "hard", value: "HARD" }
         )
     ),
 

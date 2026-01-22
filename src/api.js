@@ -27,7 +27,7 @@ query ($categorySlug: String, $filters: QuestionListFilterInput) {
       variables: {
         categorySlug: "",
         filters: {
-          difficulty: difficulty,
+          difficulty: difficulty?.toUpperCase(),
         },
       },
     });
