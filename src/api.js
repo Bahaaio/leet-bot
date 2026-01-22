@@ -4,12 +4,44 @@ const { LEETCODE_BASE_URL } = require("./constants");
 const lc = new LeetCode();
 
 /**
- * featches a random problem from LeetCode.
- *
- * @param {string?} difficulty - the random problem difficulty
- * @returns {Object} An object containing details of the random problem:
+ * @typedef LeetCodeUser
+ * @property {string} username - the LeetCode username
+ * @property {string} real_name - the real name of the user
+ * @property {string} about - the about me section of the user
+ * @property {string} avatar - the URL of the user's avatar
+ * @property {string[]} skill_tags - the skill tags of the user
+ * @property {number} ranking - the ranking of the user
+ * @property {number} streak - the current streak of the user
+ * @property {number} total_active_days - the total active days of the user
+ * @property {SolvedCount[]} solved - array of objects containing solved problem counts by difficulty
+ * @property {string?} githubUrl - the GitHub URL of the user
+ * @property {string?} linkedinUrl - the LinkedIn URL of the user
+ * @property {string?} twitterUrl - the Twitter URL of the user
  */
+
+/**
+ * @typedef SolvedCount
+ * @property {string} difficulty - "Easy" | "Medium" | "Hard"
+ * @property {number} count - Number of problems solved
+ */
+
+/**
+ * @typedef LeetCodeProblem
+ * @property {string} url - the URL of the problem
+ * @property {string} id - the frontend ID of the problem
+ * @property {string} title - the title of the problem
+ * @property {string} difficulty - the difficulty of the problem
+ * @property {string[]} tags - array of tags associated with the problem
+ * @property {number} likes - number of likes for the problem
+ * @property {number} dislikes - number of dislikes for the problem
+ */
+
 module.exports = {
+  /**
+   * featches a random problem from LeetCode.
+   * @param {string?} difficulty - the random problem difficulty
+   * @returns {Promise<LeetCodeProblem>} An object containing details of the random problem
+   */
   async getRandomProblem(difficulty) {
     const response = await lc.graphql({
       query: `
@@ -50,7 +82,7 @@ query ($categorySlug: String, $filters: QuestionListFilterInput) {
 
   /**
    * fetches the daily coding problem from LeetCode.
-   * @returns {Object} An object containing details of the daily problem:
+   * @returns {Promise<LeetCodeProblem>} An object containing details of the daily problem:
    */
   async getDailyProblem() {
     const response = await lc.graphql({
@@ -89,7 +121,7 @@ query {
   /**
    * fetches user information from LeetCode.
    * @param {string} username - the LeetCode username
-   * @returns {Object} An object containing details of the user
+   * @returns {Promise<LeetCodeUser>} An object containing details of the user
    */
   async getUser(username) {
     const response = await lc.graphql({

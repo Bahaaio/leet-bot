@@ -5,10 +5,14 @@ const {
   BOT_NAME,
 } = require("./constants");
 
+/** @typedef {import('./api').LeetCodeUser} LeetCodeUser */
+/** @typedef {import('./api').SolvedCount} SolvedCount */
+/** @typedef {import('./api').LeetCodeProblem} LeetCodeProblem */
+
 module.exports = {
   /**
    * embeds a leetcode problem into a discord embed
-   * @param {Object} problem - the leetcode problem object
+   * @param {LeetCodeProblem} problem - the leetcode problem object
    * @param {string} title - the embed title
    * @returns {EmbedBuilder} the discord embed
    */
@@ -31,7 +35,7 @@ module.exports = {
 
   /**
    * embeds a leetcode user into a discord embed
-   * @param {Object} user - the leetcode user object
+   * @param {LeetCodeUser} user - the leetcode user object
    * @returns {EmbedBuilder} the discord embed
    */
   embedUser(user) {
@@ -111,8 +115,8 @@ function buildReactionsString(likes, dislikes) {
 
 /**
  * builds a string of count of solved problems by difficulty formatted for discord embed
- * @param {Object[]} solved - array of count of solved problems by difficulty
- * @returns the formatted count of solved problems string
+ * @param {SolvedCount[]} solved - array of count of solved problems by difficulty
+ * @returns {string} the formatted count of solved problems string
  */
 function buildSolvedTags(solved) {
   let res = "";
