@@ -1,8 +1,10 @@
 const js = require("@eslint/js");
 const prettierConfig = require("eslint-config-prettier");
+const jsdoc = require("eslint-plugin-jsdoc");
 
 module.exports = [
   js.configs.recommended,
+  jsdoc.configs["flat/recommended-error"],
   {
     languageOptions: {
       ecmaVersion: "latest",
