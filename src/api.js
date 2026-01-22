@@ -19,6 +19,8 @@ query ($categorySlug: String, $filters: QuestionListFilterInput) {
     questionFrontendId
     title
     difficulty
+    likes
+    dislikes
     tags: topicTags {
       slug
     }
@@ -40,6 +42,8 @@ query ($categorySlug: String, $filters: QuestionListFilterInput) {
       title: problem.title,
       difficulty: problem.difficulty,
       tags: problem.tags.map(obj => obj.slug),
+      likes: problem.likes,
+      dislikes: problem.dislikes,
     };
   },
 
@@ -57,6 +61,8 @@ query {
       questionFrontendId
       title
       difficulty
+      likes
+      dislikes
       tags: topicTags {
         slug
       }
@@ -74,6 +80,8 @@ query {
       title: problem.title,
       difficulty: problem.difficulty,
       tags: problem.tags.map(obj => obj.slug),
+      likes: problem.likes,
+      dislikes: problem.dislikes,
     };
   },
 };
