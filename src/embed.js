@@ -24,7 +24,7 @@ module.exports = {
     return new EmbedBuilder()
       .setAuthor({ name: title, iconURL: LEETCODE_FAVICON_URL })
       .setURL(problem.url)
-      .setTitle(`${problem.title} #${problem.id}`)
+      .setTitle(`${problem.id}. ${problem.title}`)
       .setColor(0xffd700)
       .setDescription(`${difficultyIcon}  ${problem.difficulty}`)
       .addFields({ name: "Tags", value: tags })
