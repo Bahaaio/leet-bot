@@ -1,19 +1,27 @@
 {
-  "name": "bbot",
+  "name": "leet-bot",
   "version": "1.0.0",
-  "description": "a simple discord bot",
+  "description": "Discord bot for LeetCode daily challenges and random problems",
   "license": "MIT",
   "author": "Bahaaio",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Bahaaio/leet-bot.git"
+  },
   "type": "commonjs",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js",
+    "deploy": "node deploy-commands.js",
     "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
     "format": "prettier --write .",
-    "format:check": "prettier --check ."
+    "format:check": "prettier --check .",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
-    "discord.js": "^14.25.1"
+    "discord.js": "^14.25.1",
+    "leetcode-query": "^2.0.1"
   },
   "devDependencies": {
     "@eslint/js": "^9.39.2",
