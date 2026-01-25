@@ -1,8 +1,26 @@
+const http = require("node:http");
 const fs = require("node:fs");
 const path = require("node:path");
 const { Client, GatewayIntentBits, Collection } = require("discord.js");
 
 const token = process.env.TOKEN;
+
+const PORT = process.env.PORT || 3000;
+
+http
+  .createServer((req, res) => {
+    if (req.url === "/") {
+      res.writeHead(200, { "Content-Type": "text/plain" });
+      res.end("OK");
+      return;
+    }
+
+    res.writeHead(404);
+    res.end();
+  })
+  .listen(PORT, () => {
+    console.log(`Health server listening on ${PORT}`);
+  });
 
 const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 client.commands = new Collection();
