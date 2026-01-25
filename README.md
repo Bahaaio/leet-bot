@@ -29,21 +29,17 @@ npm install
 
 ### Configuration
 
-Create a `config.json` file in the root directory:
+Create a `.env` file in the root directory:
 
-```json
-{
-  "token": "YOUR_BOT_TOKEN",
-  "clientId": "YOUR_CLIENT_ID",
-  "guildId": "YOUR_GUILD_ID"
-}
+```env
+TOKEN="YOUR_BOT_TOKEN"
+CLIENT_ID="YOUR_CLIENT_ID"
 ```
 
-| Field      | Description                                |
-| ---------- | ------------------------------------------ |
-| `token`    | Your Discord bot token                     |
-| `clientId` | Your Discord application ID                |
-| `guildId`  | The Discord server ID to register commands |
+| Field      | Description                 |
+| ---------- | --------------------------- |
+| `token`    | Your Discord bot token      |
+| `clientId` | Your Discord application ID |
 
 ### Deploy Commands
 
