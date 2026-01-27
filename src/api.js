@@ -270,6 +270,12 @@ async function getSolutionData(problemId, language) {
   }
   const file = files.find(f => f.name.startsWith(problemId));
 
+  if (!file) {
+    throw new Error(
+      `Solution not found for problem ID ${problemId} in language ${language}`
+    );
+  }
+
   const url = `${NEETCODE_GH_BASE_URL}/${language}/${file.name}`;
   const problemSlug = file.name.split(".")[0].substring(5);
 
