@@ -1,5 +1,9 @@
 const { LeetCode } = require("leetcode-query");
-const { LEETCODE_BASE_URL } = require("./constants");
+const {
+  LEETCODE_BASE_URL,
+  NEETCODE_GH_BASE_URL,
+  NEETCODE_GH_API_URL,
+} = require("./constants");
 
 const lc = new LeetCode();
 
@@ -34,6 +38,19 @@ const lc = new LeetCode();
  * @property {string[]} tags - array of tags associated with the problem
  * @property {number} likes - number of likes for the problem
  * @property {number} dislikes - number of dislikes for the problem
+ */
+
+/**
+ * @typedef ProblemSolution
+ * @property {string} problemUrl - the problem URL
+ * @property {string} problemSlug - the problem slug
+ * @property {string} code - the solution code as a string
+ */
+
+/**
+ * @typedef SolutionDetails
+ * @property {string} url - the solution file URL
+ * @property {string} problemSlug - the problem slug
  */
 
 module.exports = {
@@ -183,4 +200,58 @@ query ($username: String!) {
       twitterUrl: user.twitterUrl,
     };
   },
+
+  /**
+   * fetches the solution code for a given problem and language from LeetCode.
+   * @param {string} problemId - the frontend ID of the problem
+   * @param {string} language - the programming language for the solution
+   * @returns {Promise<ProblemSolution>} An object containing the problem solution details
+   */
+  async getProblemSolution(problemId, language) {
+    const id = problemId.padStart(4, "0");
+    const { url, problemSlug } = await getSolutionData(id, language);
+
+    const res = await fetch(url);
+
+    if (!res.ok) {
+      throw new Error(
+        `Failed to fetch solution from NeetCode GitHub repository: ${res.status} ${res.statusText}`
+      );
+    }
+
+    const code = await res.text();
+    const problemUrl = `${LEETCODE_BASE_URL}/problems/${problemSlug}/`;
+
+    return {
+      problemSlug,
+      problemUrl,
+      code,
+    };
+  },
 };
+
+/**
+ * fetches the problem solution Url for a given problem.
+ * @param {string} problemId - the 0 padded frontend ID of the problem
+ * @param {string} language - the programming language for the solution
+ * @returns {Promise<SolutionDetails>} An object containing the solution URL and problem slug
+ */
+async function getSolutionData(problemId, language) {
+  const res = await fetch(`${NEETCODE_GH_API_URL}/${language}`);
+  if (!res.ok) {
+    throw new Error(
+      `Failed to fetch language directory from NeetCode GitHub repository: ${res.status} ${res.statusText}`
+    );
+  }
+
+  const files = await res.json();
+  const file = files.find(f => f.name.startsWith(problemId));
+
+  const url = `${NEETCODE_GH_BASE_URL}/${language}/${file.name}`;
+  const problemSlug = file.name.split(".")[0].substring(5);
+
+  return {
+    url,
+    problemSlug,
+  };
+}
