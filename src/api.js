@@ -6,6 +6,8 @@ const {
 } = require("./constants");
 
 const lc = new LeetCode();
+const solutionCache = {};
+let dailyCache = {};
 
 /**
  * @typedef LeetCodeUser
@@ -102,6 +104,17 @@ query ($categorySlug: String, $filters: QuestionListFilterInput) {
    * @returns {Promise<LeetCodeProblem>} An object containing details of the daily problem:
    */
   async getDailyProblem() {
+    const today = new Date().toISOString().split("T")[0];
+    if (dailyCache[today]) {
+      const ret = dailyCache[today];
+
+      // delete all other days
+      dailyCache = {};
+      dailyCache[today] = ret;
+
+      return ret;
+    }
+
     const response = await lc.graphql({
       query: `
 query {
@@ -124,7 +137,7 @@ query {
     const data = response.data.daily;
     const problem = data.question;
 
-    return {
+    const ret = {
       url: `${LEETCODE_BASE_URL}${data.link}`,
       id: problem.questionFrontendId,
       title: problem.title,
@@ -133,6 +146,9 @@ query {
       likes: problem.likes,
       dislikes: problem.dislikes,
     };
+
+    dailyCache[today] = ret;
+    return ret;
   },
 
   /**
@@ -237,14 +253,21 @@ query ($username: String!) {
  * @returns {Promise<SolutionDetails>} An object containing the solution URL and problem slug
  */
 async function getSolutionData(problemId, language) {
-  const res = await fetch(`${NEETCODE_GH_API_URL}/${language}`);
-  if (!res.ok) {
-    throw new Error(
-      `Failed to fetch language directory from NeetCode GitHub repository: ${res.status} ${res.statusText}`
-    );
-  }
+  let files;
 
-  const files = await res.json();
+  if (solutionCache[language]) {
+    files = solutionCache[language];
+  } else {
+    const res = await fetch(`${NEETCODE_GH_API_URL}/${language}`);
+    if (!res.ok) {
+      throw new Error(
+        `Failed to fetch language directory from NeetCode GitHub repository: ${res.status} ${res.statusText}`
+      );
+    }
+
+    files = await res.json();
+    solutionCache[language] = files;
+  }
   const file = files.find(f => f.name.startsWith(problemId));
 
   const url = `${NEETCODE_GH_BASE_URL}/${language}/${file.name}`;
