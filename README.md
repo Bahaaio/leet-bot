@@ -6,17 +6,18 @@ A Discord bot for LeetCode practice. Get daily challenges, random problems, and 
 
 ## Commands
 
-| Command                 | Description                                                           |
-| ----------------------- | --------------------------------------------------------------------- |
-| `/daily`                | Get today's LeetCode daily coding challenge                           |
-| `/problem [difficulty]` | Get a random LeetCode problem (optionally filter by Easy/Medium/Hard) |
-| `/profile <username>`   | View a LeetCode user's profile, stats, and social links               |
+| Command                     | Description                                                                |
+| --------------------------- | -------------------------------------------------------------------------- |
+| `/daily`                    | Get today's LeetCode daily coding challenge                                |
+| `/problem [difficulty]`     | Get a random LeetCode problem (optionally filter by Easy/Medium/Hard)      |
+| `/solution <id> <language>` | Get the solution for a specific LeetCode problem in the specified language |
+| `/profile <username>`       | View a LeetCode user's profile, stats, and social links                    |
 
 ## Setup
 
 ### Prerequisites
 
-- Node.js 18+
+- Node.js
 - A Discord bot token ([Discord Developer Portal](https://discord.com/developers/applications))
 
 ### Installation
